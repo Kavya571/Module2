@@ -1,20 +1,70 @@
+// package com.cg.onlinepizza.order.service;
+
+// import java.util.List;
+
+// import com.cg.onlinepizza.exceptions.InvalidSizeException;
+// import com.cg.onlinepizza.exceptions.OrderIdNotFoundException;
+// import com.cg.onlinepizza.order.dto.PizzaOrder;
+
+// public interface IPizzaOrderService {
+// 	PizzaOrder bookPizzaOrder(PizzaOrder order);
+
+// 	PizzaOrder updatePizzaOrder(PizzaOrder order);
+
+// 	PizzaOrder cancelPizzaOrder(int orderId) throws OrderIdNotFoundException;
+
+// 	PizzaOrder viewPizzaOrder(int orderId) throws OrderIdNotFoundException;
+
+// 	List<PizzaOrder> caluculateTotal(String size, int quantity) throws InvalidSizeException;
+// }
+
+
 package com.cg.onlinepizza.order.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.cg.onlinepizza.exceptions.InvalidSizeException;
 import com.cg.onlinepizza.exceptions.OrderIdNotFoundException;
+import com.cg.onlinepizza.order.dao.IPizzaOrderRepository;
 import com.cg.onlinepizza.order.dto.PizzaOrder;
 
-public interface IPizzaOrderService {
-	PizzaOrder bookPizzaOrder(PizzaOrder order);
 
-	PizzaOrder updatePizzaOrder(PizzaOrder order);
+@Service
+public class IPizzaOrderService {
+	
+	@Autowired
+	IPizzaOrderRepository IPizzaOrderRepository;
+	
+	public PizzaOrder bookPizzaOrder(PizzaOrder order) {
+		return IPizzaOrderRepository.save(order);	
+	}
+	public PizzaOrder updatePizzaOrder(PizzaOrder order) {
+		return IPizzaOrderRepository.save(order);
+	}
 
-	PizzaOrder cancelPizzaOrder(int orderId) throws OrderIdNotFoundException;
+	public void cancelPizzaOrder(int orderId) throws OrderIdNotFoundException{
+		try {
+			IPizzaOrderRepository.deleteById(orderId);
+		}
+		catch(Exception e) {
+			throw new OrderIdNotFoundException("Order Id not present in table");
+		}
+	}
 
-	PizzaOrder viewPizzaOrder(int orderId) throws OrderIdNotFoundException;
-
+	public PizzaOrder viewPizzaOrder(int orderId) throws OrderIdNotFoundException{
+		try {
+			return IPizzaOrderRepository.findById(orderId).get();
+			
+		}
+		catch(Exception e) {
+			throw new OrderIdNotFoundException("Order Id not present in table");
+		}
+	}
+	
+	
 	List<PizzaOrder> caluculateTotal(String size, int quantity) throws InvalidSizeException;
 }
 
