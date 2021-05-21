@@ -1,12 +1,30 @@
 package com.cg.onlinepizza.pizza.dto;
 
+import javax.persistence.Column;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name="Pizza")
+@Table(name="Pizza")
 public class Pizza {
+	@Id
+	@GeneratedValue
+	@Column
 	private int pizzaId;
+	@Column
 	private String pizzaType;
+	@Column
 	private String pizzaName;
+	@Column
 	private String pizzaDescription;
+	@Column
 	private double pizzaCost;
+	@Column
 	private double pizzaCostAfterCoupan;
+	@Column
 	public int getPizzaId() {
 		return pizzaId;
 	}
