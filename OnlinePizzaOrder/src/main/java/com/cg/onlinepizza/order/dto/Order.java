@@ -1,10 +1,21 @@
 package com.cg.onlinepizza.order.dto;
 
-public class Order {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
+public class Order {
+	@Id
+	@Column
 	private int orderId;
+	@Column
 	private String orderType;
+	@Column
 	private String orderDescription;
+	@Column
 	private int customerId;
 
 	public int getOrderId() {
