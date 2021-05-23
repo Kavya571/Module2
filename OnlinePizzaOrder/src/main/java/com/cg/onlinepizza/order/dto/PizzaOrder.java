@@ -2,20 +2,37 @@ package com.cg.onlinepizza.order.dto;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.cg.onlinepizza.coupan.dto.Coupan;
 import com.cg.onlinepizza.pizza.dto.Pizza;
 
+@Entity
+@Table
 public class PizzaOrder {
-
+	@Id
+	@Column
 	private int bookingOrderId;
+	@Column
 	private LocalDate dateOfOrder;
+	@Column
 	private String transactionMode;
+	@Column
 	private int quantity;
+	@Column
 	private String size;//medium,regular,large
+	@Column
 	private double totalCost;
+	@Column
 	private Pizza pizza;
+	@Column
 	private Order order;
+	@Column
 	private Coupan coupan;
+	
 	public int getBookingOrderId() {
 		return bookingOrderId;
 	}
